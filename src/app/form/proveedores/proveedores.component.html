@@ -23,16 +23,16 @@
         <mat-label>Tipo de Proveedor de Servicios</mat-label>
         <mat-select formControlName="tipo_explotador">
           <mat-option value="1">EXPLOTADOR AEREO - AOC </mat-option>
-          <mat-option value="3">ORGANIZACION DE MANTENIMIENTO </mat-option>
-          <mat-option value="4"
+          <mat-option value="2">ORGANIZACION DE MANTENIMIENTO </mat-option>
+          <mat-option value="3"
             >CENTRO DE INSTRUCCION DE AERONAUTICA CIVIL - CIAC
           </mat-option>
-          <mat-option value="7">OPERADOR AEREO (RAB 91)</mat-option>
-          <mat-option value="8">OPERADOR DE AERODROMO (RAB 139)</mat-option>
-          <mat-option value="9"
+          <mat-option value="4">OPERADOR AEREO (RAB 91)</mat-option>
+          <mat-option value="5">OPERADOR DE AERODROMO (RAB 139)</mat-option>
+          <mat-option value="6"
             >PROVEEDOR DE SERVICIOS NAVEGACIÓN AEREA (RAB211)</mat-option
           >
-          <mat-option value="10">OTRO</mat-option>
+          <mat-option value="7">OTRO</mat-option>
         </mat-select>
       </mat-form-field>
 
@@ -173,7 +173,7 @@
         <input matInput formControlName="otro_certificado_organizacion" />
       </mat-form-field>
 
-      <div *ngIf="!['1'].includes(form.get('tipo_explotador')?.value)">
+      <div *ngIf="!['1', '2'].includes(form.get('tipo_explotador')?.value)">
         <mat-form-field appearance="outline" class="full-width">
           <mat-label>Tipo de Operación de la Organización/Entidad</mat-label>
           <mat-select formControlName="tipo_operacion">
@@ -301,18 +301,15 @@
 
         <mat-checkbox formControlName="especificacion13">Otro</mat-checkbox>
 
-        <!-- Mostrar el input solo si el checkbox está marcado -->
-        <div
-          *ngIf="form.get('especificacion13')?.value"
-          style="margin-top: 10px"
-        >
+        <!-- Mostrar el input solo si el checkbox está marcado mostrar para especifica corregir-->
+        <!-- <div style="margin-top: 10px">
           <mat-form-field appearance="fill">
             <mat-label>Especificación</mat-label>
             <input matInput formControlName="otroTexto13" />
           </mat-form-field>
-        </div>
+        </div> -->
         <br />
-        <div>
+        <div *ngIf="['1'].includes(form.get('tipo_explotador')?.value)">
           <mat-form-field appearance="outline">
             <mat-label>Cantidad total de Aeronaves</mat-label>
             <input
@@ -833,7 +830,10 @@
         4. Personal Directorio y Técnico
       </ng-template>
       <div
-        *ngIf="['1'].includes(form.get('tipo_explotador')?.value)"
+        *ngIf="
+          form.get('certificacion_organizacion')?.value === '2' &&
+          form.get('tipo_explotador')?.value === '1'
+        "
         style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px"
       >
         <mat-form-field appearance="outline" class="full-width">
@@ -857,7 +857,7 @@
         </mat-form-field>
 
         <mat-form-field appearance="outline" class="full-width">
-          <mat-label>Responsable de Mantenimineto (OMA) </mat-label>
+          <mat-label>Responsable de Operaciones </mat-label>
           <input matInput formControlName="numero_resolucion_administrativa" />
         </mat-form-field>
 
@@ -876,6 +876,25 @@
           <input matInput formControlName="numero_resolucion_administrativa" />
         </mat-form-field>
 
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Responsable de Mantenimiento </mat-label>
+          <input matInput formControlName="numero_resolucion_administrativa" />
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Teléfono</mat-label>
+          <input matInput formControlName="numero_resolucion_administrativa" />
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Correo</mat-label>
+          <input matInput formControlName="numero_resolucion_administrativa" />
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Fecha Designación</mat-label>
+          <input matInput formControlName="numero_resolucion_administrativa" />
+        </mat-form-field>
         <mat-form-field appearance="outline" class="full-width">
           <mat-label>Responsable de SMS </mat-label>
           <input matInput formControlName="numero_resolucion_administrativa" />
@@ -895,6 +914,7 @@
           <mat-label>Fecha Designación</mat-label>
           <input matInput formControlName="numero_resolucion_administrativa" />
         </mat-form-field>
+
         <mat-form-field appearance="outline" class="full-width">
           <mat-label>Responsable de Calidad </mat-label>
           <input matInput formControlName="numero_resolucion_administrativa" />
@@ -914,6 +934,494 @@
           <mat-label>Fecha Designación</mat-label>
           <input matInput formControlName="numero_resolucion_administrativa" />
         </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Jefe de Pilotos</mat-label>
+          <input matInput formControlName="numero_resolucion_administrativa" />
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Teléfono</mat-label>
+          <input matInput formControlName="numero_resolucion_administrativa" />
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Correo</mat-label>
+          <input matInput formControlName="numero_resolucion_administrativa" />
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>fecha</mat-label>
+          <input matInput formControlName="numero_resolucion_administrativa" />
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Jefe de Instrucción </mat-label>
+          <input matInput formControlName="numero_resolucion_administrativa" />
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Teléfono</mat-label>
+          <input matInput formControlName="numero_resolucion_administrativa" />
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Correo</mat-label>
+          <input matInput formControlName="numero_resolucion_administrativa" />
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Fecha</mat-label>
+          <input matInput formControlName="numero_resolucion_administrativa" />
+        </mat-form-field>
+      </div>
+      <!--Para aoc y 135-->
+      <div
+        *ngIf="
+          form.get('certificacion_organizacion')?.value === '3' &&
+          form.get('tipo_explotador')?.value === '1'
+        "
+        style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px"
+      >
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Gerente O Ejecutivo Responsable</mat-label>
+          <input matInput formControlName="numero_resolucion_administrativa" />
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Teléfono</mat-label>
+          <input matInput formControlName="numero_resolucion_administrativa" />
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Correo</mat-label>
+          <input matInput formControlName="numero_resolucion_administrativa" />
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Fecha Designación</mat-label>
+          <input matInput formControlName="numero_resolucion_administrativa" />
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Responsable de Operaciones </mat-label>
+          <input matInput formControlName="numero_resolucion_administrativa" />
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Teléfono</mat-label>
+          <input matInput formControlName="numero_resolucion_administrativa" />
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Correo</mat-label>
+          <input matInput formControlName="numero_resolucion_administrativa" />
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Fecha Designación</mat-label>
+          <input matInput formControlName="numero_resolucion_administrativa" />
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Responsable de Mantenimiento </mat-label>
+          <input matInput formControlName="numero_resolucion_administrativa" />
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Teléfono</mat-label>
+          <input matInput formControlName="numero_resolucion_administrativa" />
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Correo</mat-label>
+          <input matInput formControlName="numero_resolucion_administrativa" />
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Fecha Designación</mat-label>
+          <input matInput formControlName="numero_resolucion_administrativa" />
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Responsable de SMS </mat-label>
+          <input matInput formControlName="numero_resolucion_administrativa" />
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Teléfono</mat-label>
+          <input matInput formControlName="numero_resolucion_administrativa" />
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Correo</mat-label>
+          <input matInput formControlName="numero_resolucion_administrativa" />
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Fecha Designación</mat-label>
+          <input matInput formControlName="numero_resolucion_administrativa" />
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Responsable de Calidad </mat-label>
+          <input matInput formControlName="numero_resolucion_administrativa" />
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Teléfono</mat-label>
+          <input matInput formControlName="numero_resolucion_administrativa" />
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Correo</mat-label>
+          <input matInput formControlName="numero_resolucion_administrativa" />
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Fecha Designación</mat-label>
+          <input matInput formControlName="numero_resolucion_administrativa" />
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Jefe de Pilotos</mat-label>
+          <input matInput formControlName="numero_resolucion_administrativa" />
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Teléfono</mat-label>
+          <input matInput formControlName="numero_resolucion_administrativa" />
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Correo</mat-label>
+          <input matInput formControlName="numero_resolucion_administrativa" />
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>fecha</mat-label>
+          <input matInput formControlName="numero_resolucion_administrativa" />
+        </mat-form-field>
+      </div>
+
+      <div
+        *ngIf="
+          form.get('certificacion_organizacion')?.value === '6' &&
+          form.get('tipo_explotador')?.value === '2'
+        "
+        style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px"
+      >
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Gerente O Ejecutivo Responsable</mat-label>
+          <input matInput formControlName="numero_resolucion_administrativa" />
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Teléfono</mat-label>
+          <input matInput formControlName="numero_resolucion_administrativa" />
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Correo</mat-label>
+          <input matInput formControlName="numero_resolucion_administrativa" />
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Fecha Designación</mat-label>
+          <input matInput formControlName="numero_resolucion_administrativa" />
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Responsable de Mantenimiento </mat-label>
+          <input matInput formControlName="numero_resolucion_administrativa" />
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Teléfono</mat-label>
+          <input matInput formControlName="numero_resolucion_administrativa" />
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Correo</mat-label>
+          <input matInput formControlName="numero_resolucion_administrativa" />
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Fecha Designación</mat-label>
+          <input matInput formControlName="numero_resolucion_administrativa" />
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Responsable de SMS </mat-label>
+          <input matInput formControlName="numero_resolucion_administrativa" />
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Teléfono</mat-label>
+          <input matInput formControlName="numero_resolucion_administrativa" />
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Correo</mat-label>
+          <input matInput formControlName="numero_resolucion_administrativa" />
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Fecha Designación</mat-label>
+          <input matInput formControlName="numero_resolucion_administrativa" />
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Responsable de Calidad </mat-label>
+          <input matInput formControlName="numero_resolucion_administrativa" />
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Teléfono</mat-label>
+          <input matInput formControlName="numero_resolucion_administrativa" />
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Correo</mat-label>
+          <input matInput formControlName="numero_resolucion_administrativa" />
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Fecha Designación</mat-label>
+          <input matInput formControlName="numero_resolucion_administrativa" />
+        </mat-form-field>
+
+        <!-- Mostrar el input solo si el checkbox está marcado -->
+
+        <br />
+      </div>
+      <div
+        *ngIf="
+          form.get('certificacion_organizacion')?.value === '6' &&
+          form.get('tipo_explotador')?.value === '2'
+        "
+      >
+        <mat-form-field appearance="outline">
+          <mat-label>Cantidad de Personal Certificado</mat-label>
+          <input
+            matInput
+            type="number"
+            [formControlName]="'cantidad'"
+            min="1"
+          />
+        </mat-form-field>
+
+        <button
+          mat-raised-button
+          color="primary"
+          (click)="generarInputs()"
+          type="button"
+        >
+          Aceptar
+        </button>
+
+        <div formArrayName="campos" style="margin-top: 20px width: 100%;">
+          <div
+            style="
+              display: grid;
+              grid-template-columns: repeat(5, 1fr);
+              gap: 16px;
+            "
+            *ngFor="let control of campos.controls; let i = index"
+            [formGroupName]="i"
+          >
+            <mat-form-field
+              appearance="fill"
+              style="width: 100%; margin-top: 100px"
+            >
+              <mat-label>Nombres {{ i + 1 }}</mat-label>
+              <input matInput formControlName="valor" />
+            </mat-form-field>
+            <mat-form-field
+              appearance="fill"
+              style="width: 100%; margin-top: 100px"
+            >
+              <mat-label>Primer Apellido {{ i + 1 }}</mat-label>
+              <input matInput formControlName="valor" />
+            </mat-form-field>
+
+            <mat-form-field
+              appearance="fill"
+              style="width: 100%; margin-top: 100px"
+            >
+              <mat-label>Segundo Apellido {{ i + 1 }}</mat-label>
+              <input matInput formControlName="valor" />
+            </mat-form-field>
+            <mat-form-field
+              appearance="fill"
+              style="width: 100%; margin-top: 100px"
+            >
+              <mat-label>Cedula Identidad {{ i + 1 }}</mat-label>
+              <input matInput formControlName="valor" />
+            </mat-form-field>
+            <mat-form-field
+              appearance="fill"
+              style="width: 100%; margin-top: 100px"
+            >
+              <mat-label>Nro de Licencia {{ i + 1 }}</mat-label>
+              <input matInput formControlName="valor" />
+            </mat-form-field>
+          </div>
+        </div>
+      </div>
+
+      <!--ciac -->
+      <div
+        *ngIf="form.get('tipo_explotador')?.value === '3'"
+        style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px"
+      >
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Gerente O Ejecutivo Responsable</mat-label>
+          <input matInput formControlName="numero_resolucion_administrativa" />
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Teléfono</mat-label>
+          <input matInput formControlName="numero_resolucion_administrativa" />
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Correo</mat-label>
+          <input matInput formControlName="numero_resolucion_administrativa" />
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Fecha Designación</mat-label>
+          <input matInput formControlName="numero_resolucion_administrativa" />
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Jefe de Vuelo </mat-label>
+          <input matInput formControlName="numero_resolucion_administrativa" />
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Teléfono</mat-label>
+          <input matInput formControlName="numero_resolucion_administrativa" />
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Correo</mat-label>
+          <input matInput formControlName="numero_resolucion_administrativa" />
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Fecha Designación</mat-label>
+          <input matInput formControlName="numero_resolucion_administrativa" />
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Jefe de Instrucción Teorica </mat-label>
+          <input matInput formControlName="numero_resolucion_administrativa" />
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Teléfono</mat-label>
+          <input matInput formControlName="numero_resolucion_administrativa" />
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Correo</mat-label>
+          <input matInput formControlName="numero_resolucion_administrativa" />
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Fecha Designación</mat-label>
+          <input matInput formControlName="numero_resolucion_administrativa" />
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Asistente Instructor </mat-label>
+          <input matInput formControlName="numero_resolucion_administrativa" />
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Teléfono</mat-label>
+          <input matInput formControlName="numero_resolucion_administrativa" />
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Correo</mat-label>
+          <input matInput formControlName="numero_resolucion_administrativa" />
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Fecha Designación</mat-label>
+          <input matInput formControlName="numero_resolucion_administrativa" />
+        </mat-form-field>
+
+        <!-- Mostrar el input solo si el checkbox está marcado -->
+
+        <br />
+      </div>
+      <div *ngIf="form.get('tipo_explotador')?.value === '3'">
+        <mat-form-field appearance="outline">
+          <mat-label>Cantidad de Personal Certificado</mat-label>
+          <input
+            matInput
+            type="number"
+            [formControlName]="'cantidad'"
+            min="1"
+          />
+        </mat-form-field>
+
+        <button
+          mat-raised-button
+          color="primary"
+          (click)="generarInputs()"
+          type="button"
+        >
+          Aceptar
+        </button>
+
+        <div formArrayName="campos" style="margin-top: 20px width: 100%;">
+          <div
+            style="
+              display: grid;
+              grid-template-columns: repeat(5, 1fr);
+              gap: 16px;
+            "
+            *ngFor="let control of campos.controls; let i = index"
+            [formGroupName]="i"
+          >
+            <mat-form-field
+              appearance="fill"
+              style="width: 100%; margin-top: 100px"
+            >
+              <mat-label>Nombres {{ i + 1 }}</mat-label>
+              <input matInput formControlName="valor" />
+            </mat-form-field>
+            <mat-form-field
+              appearance="fill"
+              style="width: 100%; margin-top: 100px"
+            >
+              <mat-label>Primer Apellido {{ i + 1 }}</mat-label>
+              <input matInput formControlName="valor" />
+            </mat-form-field>
+
+            <mat-form-field
+              appearance="fill"
+              style="width: 100%; margin-top: 100px"
+            >
+              <mat-label>Segundo Apellido {{ i + 1 }}</mat-label>
+              <input matInput formControlName="valor" />
+            </mat-form-field>
+            <mat-form-field
+              appearance="fill"
+              style="width: 100%; margin-top: 100px"
+            >
+              <mat-label>Cedula Identidad {{ i + 1 }}</mat-label>
+              <input matInput formControlName="valor" />
+            </mat-form-field>
+            <mat-form-field
+              appearance="fill"
+              style="width: 100%; margin-top: 100px"
+            >
+              <mat-label>Nro de Licencia {{ i + 1 }}</mat-label>
+              <input matInput formControlName="valor" />
+            </mat-form-field>
+          </div>
+        </div>
       </div>
     </mat-tab>
 
