@@ -1,0 +1,929 @@
+<h2 class="form-title">Registro de Proveedores de Servicio</h2>
+<form [formGroup]="form" (ngSubmit)="onSubmit()" class="form-grid">
+  <mat-tab-group>
+    <!-- Columna izquierda -->
+    <!--<div class="form-column">-->
+
+    <mat-tab label="1. Información General de la Organización">
+      <ng-template mat-tab-label>
+        <img
+          src="assets/information.png"
+          width="20"
+          height="20"
+          style="margin-right: 8px"
+        />
+        1. Información General de la Organización
+      </ng-template>
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Nombre o Razón Social de la Organización/Entidad</mat-label>
+        <input matInput formControlName="nombre_organizacion" />
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Tipo de Proveedor de Servicios</mat-label>
+        <mat-select formControlName="tipo_explotador">
+          <mat-option value="1">EXPLOTADOR AEREO - AOC </mat-option>
+          <mat-option value="3">ORGANIZACION DE MANTENIMIENTO </mat-option>
+          <mat-option value="4"
+            >CENTRO DE INSTRUCCION DE AERONAUTICA CIVIL - CIAC
+          </mat-option>
+          <mat-option value="7">OPERADOR AEREO (RAB 91)</mat-option>
+          <mat-option value="8">OPERADOR DE AERODROMO (RAB 139)</mat-option>
+          <mat-option value="9"
+            >PROVEEDOR DE SERVICIOS NAVEGACIÓN AEREA (RAB211)</mat-option
+          >
+          <mat-option value="10">OTRO</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field
+        *ngIf="form.get('tipo_explotador')?.value === '10'"
+        appearance="outline"
+        class="full-width"
+      >
+        <mat-label>Otro tipo de Proveedor</mat-label>
+        <input matInput formControlName="otro_proveedor" />
+      </mat-form-field>
+
+      <!--departamento ubicacion de la base principal-->
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label
+          >Departamento de ubicación de la Base Principal de la
+          Organización/Entidad
+        </mat-label>
+        <mat-select formControlName="departamento">
+          <mat-option value="1">LA PAZ</mat-option>
+          <mat-option value="2">COCHABAMBA</mat-option>
+          <mat-option value="3">SANTA CRUZ</mat-option>
+          <mat-option value="4">BENI</mat-option>
+          <mat-option value="5">PANDO</mat-option>
+          <mat-option value="6">ORURO</mat-option>
+          <mat-option value="7">POTOSI</mat-option>
+          <mat-option value="8">CHUQUISACA</mat-option>
+          <mat-option value="9">TARIJA</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <!--dIRECCION UBICACION-->
+
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label
+          >Dirección de ubicación Base Principal de la Organización/Entidad
+        </mat-label>
+        <input matInput formControlName="direccion_organizacion" />
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label
+          >Teléfono de principal de contacto de la Organización/Entidad
+        </mat-label>
+        <input matInput type="number" formControlName="telefono_organizacion" />
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label
+          >Correo electronico principal de contacto de la Organización/Entidad
+        </mat-label>
+        <input matInput formControlName="Correo_organizacion" />
+      </mat-form-field>
+    </mat-tab>
+
+    <mat-tab label="2. Certificación">
+      <!-- fecha de la certificacion inicial de la organizacion-->
+      <ng-template mat-tab-label>
+        <img
+          src="assets/certificate.png"
+          width="20"
+          height="20"
+          style="margin-right: 8px"
+        />
+        2. Certificación
+      </ng-template>
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label
+          >Fecha de la certificación inicial de la Organización/Entidad
+        </mat-label>
+        <input
+          matInput
+          [matDatepicker]="pickers"
+          formControlName="fechaInicioCertificacionx"
+        />
+        <mat-datepicker-toggle
+          matSuffix
+          [for]="pickers"
+        ></mat-datepicker-toggle>
+        <mat-datepicker #pickers></mat-datepicker>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label
+          >Fecha de expiración de la Certificación vigente de la
+          Organización/Entidad
+        </mat-label>
+        <input
+          matInput
+          [matDatepicker]="picker"
+          formControlName="fechaExpiracionCertificacion"
+        />
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label
+          >Numero de Certificado emtido por la DGAC a Organización/Entidad
+        </mat-label>
+        <input matInput formControlName="numero_certificado" />
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label
+          >Numero de Resolución Administrativa emtido por la DGAC
+        </mat-label>
+        <input matInput formControlName="numero_resolucion_administrativa" />
+      </mat-form-field>
+
+      <!--Resolución a la clase de certificado-->
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label
+          >Regulación aplicable a la Clase de Certificación otorgada o aplicable
+          a la Organización/Entidad
+        </mat-label>
+        <mat-select formControlName="certificacion_organizacion">
+          <mat-option value="1">RAB 91</mat-option>
+          <mat-option value="2">RAB 121</mat-option>
+          <mat-option value="3">RAB 135</mat-option>
+          <mat-option value="4">RAB 133</mat-option>
+          <mat-option value="5">RAB 139</mat-option>
+          <mat-option value="6">RAB 145</mat-option>
+          <mat-option value="7">RAB 211</mat-option>
+          <mat-option value="8">RAB 141</mat-option>
+          <mat-option value="9">RAB 142</mat-option>
+          <mat-option value="10">RAB 147</mat-option>
+          <mat-option value="11">Otro</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field
+        *ngIf="form.get('certificacion_organizacion')?.value === '10'"
+        appearance="outline"
+        class="full-width"
+      >
+        <mat-label>Otro regulacion aplicada</mat-label>
+        <input matInput formControlName="otro_certificado_organizacion" />
+      </mat-form-field>
+
+      <div *ngIf="!['1'].includes(form.get('tipo_explotador')?.value)">
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Tipo de Operación de la Organización/Entidad</mat-label>
+          <mat-select formControlName="tipo_operacion">
+            <ng-container
+              *ngIf="
+                ['1', '2'].includes(form.get('tipo_explotador')?.value);
+                else regularNormal
+              "
+            >
+              <mat-option value="1">Regular </mat-option>
+            </ng-container>
+
+            <ng-template #regularNormal>
+              <mat-option value="1">Regular</mat-option>
+            </ng-template>
+            <!--opcion 2 no regualble-->
+            <ng-container
+              *ngIf="
+                ['1', '2'].includes(form.get('tipo_explotador')?.value);
+                else NoregularNormal
+              "
+            >
+              <mat-option value="2">No Regular</mat-option>
+            </ng-container>
+
+            <ng-template #NoregularNormal>
+              <mat-option value="2">No Regular</mat-option>
+            </ng-template>
+
+            <!-- fin-->
+            <mat-option
+              value="3"
+              *ngIf="!['1', '2'].includes(form.get('tipo_explotador')?.value)"
+              >Aviación General</mat-option
+            >
+            <mat-option
+              value="4"
+              *ngIf="!['1', '2'].includes(form.get('tipo_explotador')?.value)"
+              >Trabajo Aéreo</mat-option
+            >
+            <mat-option
+              value="5"
+              *ngIf="!['1', '2'].includes(form.get('tipo_explotador')?.value)"
+              >Entrenamiento</mat-option
+            >
+
+            <mat-option
+              value="6"
+              *ngIf="!['1', '2'].includes(form.get('tipo_explotador')?.value)"
+              >Mantenimiento</mat-option
+            >
+
+            <mat-option
+              value="7"
+              *ngIf="!['1', '2'].includes(form.get('tipo_explotador')?.value)"
+              >Otro</mat-option
+            >
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <mat-form-field
+        *ngIf="form.get('tipo_operacion')?.value === '7'"
+        appearance="outline"
+        class="full-width"
+      >
+        <mat-label>Otro tipo de Operación</mat-label>
+        <input matInput formControlName="otro_tipo_operacion" />
+      </mat-form-field>
+
+      <mat-form-field
+        appearance="outline"
+        class="full-width"
+        *ngIf="!['3'].includes(form.get('tipo_explotador')?.value)"
+      >
+        <mat-label
+          >Tipo de Transporte Aereo Comercial de la Organización/Entidad
+        </mat-label>
+        <mat-select formControlName="tipo_transporte_aereo">
+          <mat-option value="1">Pasajero</mat-option>
+          <mat-option value="2">Carga</mat-option>
+          <mat-option value="3">Pasajero y Carga</mat-option>
+          <mat-option value="4">Otro</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field
+        *ngIf="form.get('tipo_transporte_aereo')?.value === '4'"
+        appearance="outline"
+        class="full-width"
+      >
+        <mat-label>Otro tipo transporte Aéreo</mat-label>
+        <input matInput formControlName="otro_tipo_transporte_aereo" />
+      </mat-form-field>
+
+      <!--Especificaciones relativas a las operacinones 
+   operaciones especificas otorgandas al organizacion-->
+      <div *ngIf="!['3'].includes(form.get('tipo_explotador')?.value)">
+        <label class="section-label">
+          Aprobaciones específicas otorgadas a la Organización/Entidad </label
+        ><br />
+        <mat-checkbox formControlName="especificacion1">EDTO</mat-checkbox>
+        <mat-checkbox formControlName="especificacion2">PBN</mat-checkbox>
+        <mat-checkbox formControlName="especificacion3"
+          >CAT II/III</mat-checkbox
+        >
+        <mat-checkbox formControlName="especificacion4">EFB</mat-checkbox>
+        <mat-checkbox formControlName="especificacion5">RVSM</mat-checkbox>
+        <mat-checkbox formControlName="especificacion6"
+          >Mercancias Peligrosas</mat-checkbox
+        >
+        <mat-checkbox formControlName="especificacion7"
+          >Línea Larga</mat-checkbox
+        >
+        <mat-checkbox formControlName="especificacion8"
+          >Línea Larga</mat-checkbox
+        >
+        <mat-checkbox formControlName="especificacion9"
+          >Grúa de Rescate</mat-checkbox
+        >
+        <mat-checkbox formControlName="especificacion10">HETS</mat-checkbox>
+        <mat-checkbox formControlName="especificacion11">MEDEVAC</mat-checkbox>
+        <mat-checkbox formControlName="especificacion12"
+          >NO POSEE APROBACIÓN ESPECIFICA OTORGADA</mat-checkbox
+        >
+
+        <mat-checkbox formControlName="especificacion13">Otro</mat-checkbox>
+
+        <!-- Mostrar el input solo si el checkbox está marcado -->
+        <div
+          *ngIf="form.get('especificacion13')?.value"
+          style="margin-top: 10px"
+        >
+          <mat-form-field appearance="fill">
+            <mat-label>Especificación</mat-label>
+            <input matInput formControlName="otroTexto13" />
+          </mat-form-field>
+        </div>
+        <br />
+        <div>
+          <mat-form-field appearance="outline">
+            <mat-label>Cantidad total de Aeronaves</mat-label>
+            <input
+              matInput
+              type="number"
+              [formControlName]="'cantidad'"
+              min="1"
+            />
+          </mat-form-field>
+
+          <button
+            mat-raised-button
+            color="primary"
+            (click)="generarInputs()"
+            type="button"
+          >
+            Aceptar
+          </button>
+
+          <div formArrayName="campos" style="margin-top: 20px">
+            <div
+              style="
+                display: grid;
+                grid-template-columns: repeat(4, 1fr);
+                gap: 16px;
+              "
+              *ngFor="let control of campos.controls; let i = index"
+              [formGroupName]="i"
+            >
+              <mat-form-field
+                appearance="fill"
+                style="width: 100%; margin-top: 10px"
+              >
+                <mat-label>Matricula {{ i + 1 }}</mat-label>
+                <input matInput formControlName="valor" />
+              </mat-form-field>
+              <mat-form-field
+                appearance="fill"
+                style="width: 100%; margin-top: 10px"
+              >
+                <mat-label>Marca {{ i + 1 }}</mat-label>
+                <input matInput formControlName="valor" />
+              </mat-form-field>
+
+              <mat-form-field
+                appearance="fill"
+                style="width: 100%; margin-top: 10px"
+              >
+                <mat-label>Modelo {{ i + 1 }}</mat-label>
+                <input matInput formControlName="valor" />
+              </mat-form-field>
+            </div>
+          </div>
+        </div>
+      </div>
+    </mat-tab>
+    <!--TAB 3 -->
+    <mat-tab label="3. Características de la Organización">
+      <ng-template mat-tab-label>
+        <img
+          src="assets/organizacion.png"
+          width="20"
+          height="20"
+          style="margin-right: 8px"
+        />
+        3. Características de la Organización
+      </ng-template>
+      <br />
+      <label
+        class="section-label"
+        *ngIf="['3', '4', '5'].includes(form.get('tipo_explotador')?.value)"
+        >Organización</label
+      >
+      <mat-radio-group
+        *ngIf="['3', '4', '5'].includes(form.get('tipo_explotador')?.value)"
+        formControlName="nacionalidad_organizacion"
+        class="radio-group"
+      >
+        <mat-radio-button value="nacional">Nacional</mat-radio-button>
+        <mat-radio-button value="extranjera">Extranjera</mat-radio-button>
+      </mat-radio-group>
+      <br />
+      <label class="section-label">Tamaño de la organización</label>
+      <mat-radio-group formControlName="tamanoOrganizacion" class="radio-group">
+        <mat-radio-button value="pequeno">Pequeño</mat-radio-button>
+        <mat-radio-button value="mediano">Mediano</mat-radio-button>
+        <mat-radio-button value="grande">Grande</mat-radio-button>
+      </mat-radio-group>
+      <br />
+      <label class="section-label">Complejidad de la Organización</label>
+      <mat-radio-group
+        formControlName="complejidad_organizacion"
+        class="radio-group"
+      >
+        <mat-radio-button value="compleja">Compleja</mat-radio-button>
+        <mat-radio-button value="no_compleja">No compleja</mat-radio-button>
+      </mat-radio-group>
+
+      <!--Capacidad de la orgnaiazación-->
+      <div *ngIf="['3'].includes(form.get('tipo_explotador')?.value)">
+        <br />
+        <label class="section-label">
+          Capacidades de la Organización/Entidad (solo OMA) <br />
+        </label>
+        <mat-checkbox formControlName="capacidad1"
+          >Estructura de Aeronaves</mat-checkbox
+        >
+        <mat-checkbox formControlName="capacidad2"
+          >Motores de Aeronaves</mat-checkbox
+        >
+        <mat-checkbox formControlName="capacidad3">Hélices</mat-checkbox>
+        <mat-checkbox formControlName="capacidad4"
+          >Rádio (Aviónica)</mat-checkbox
+        >
+        <mat-checkbox formControlName="capacidad5"
+          >Sistemas de Computadora</mat-checkbox
+        >
+        <mat-checkbox formControlName="capacidad6">Accesorios</mat-checkbox>
+        <mat-checkbox formControlName="capacidad7"
+          >Servicios Especializados</mat-checkbox
+        >
+        <mat-checkbox formControlName="capacidad8">Otro</mat-checkbox>
+        <div *ngIf="form.get('capacidad8')?.value">
+          <mat-form-field appearance="fill">
+            <mat-label>Especifique</mat-label>
+            <input matInput formControlName="otroTextoCapacidad" />
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div *ngIf="['4', '5'].includes(form.get('tipo_explotador')?.value)">
+        <label class="section-label">
+          Tipo de la Organización/Entidad (Solo CIAC) <br />
+        </label>
+        <mat-checkbox formControlName="tipo1">Tipo 1</mat-checkbox>
+        <mat-checkbox formControlName="tipo2">Tipo 2</mat-checkbox>
+        <mat-checkbox formControlName="tipo3">Tipo 3</mat-checkbox>
+        <mat-checkbox formControlName="tipo4">CEAC RAB-142</mat-checkbox>
+        <mat-checkbox formControlName="tipo5">CIAC RAB-147</mat-checkbox>
+      </div>
+      <br />
+      <label class="section-label">
+        Indique si la Organización/Entidad cuenta con otras Certificaciones o
+        participa en programas de intercambio de la industria (si aplica) <br />
+      </label>
+      <mat-checkbox formControlName="certificado1"
+        >TRAINAIR PLUS (OACI)</mat-checkbox
+      >
+
+      <mat-form-field
+        *ngIf="form.get('certificado1')?.value"
+        appearance="outline"
+        class="full-width"
+      >
+        <mat-label>Fecha de caducidad</mat-label>
+        <input
+          matInput
+          [matDatepicker]="pickerCaducidad"
+          formControlName="fechaCaducidadEspecificacion1"
+        />
+        <mat-datepicker-toggle
+          matSuffix
+          [for]="pickerCaducidad"
+        ></mat-datepicker-toggle>
+        <mat-datepicker #pickerCaducidad></mat-datepicker>
+      </mat-form-field>
+
+      <mat-checkbox formControlName="certificado2"
+        >Certificacion IOSA (IATA Operational Safety Audit)</mat-checkbox
+      >
+      <mat-form-field
+        *ngIf="form.get('certificado2')?.value"
+        appearance="outline"
+        class="full-width"
+      >
+        <mat-label>Fecha de caducidad</mat-label>
+        <input
+          matInput
+          [matDatepicker]="pickerCaducidad"
+          formControlName="fechaCaducidadEspecificacion1"
+        />
+        <mat-datepicker-toggle
+          matSuffix
+          [for]="pickerCaducidad"
+        ></mat-datepicker-toggle>
+        <mat-datepicker #pickerCaducidad></mat-datepicker>
+      </mat-form-field>
+
+      <mat-checkbox formControlName="certificado3"
+        >Certificacion ISAGO (IATA Safety Audit for Ground
+        Operations)</mat-checkbox
+      >
+      <mat-form-field
+        *ngIf="form.get('certificado3')?.value"
+        appearance="outline"
+        class="full-width"
+      >
+        <mat-label>Fecha de caducidad</mat-label>
+        <input
+          matInput
+          [matDatepicker]="pickerCaducidad"
+          formControlName="fechaCaducidadEspecificacion1"
+        />
+        <mat-datepicker-toggle
+          matSuffix
+          [for]="pickerCaducidad"
+        ></mat-datepicker-toggle>
+        <mat-datepicker #pickerCaducidad></mat-datepicker>
+      </mat-form-field>
+      <mat-checkbox formControlName="certificado4"
+        >ISS (IATA Safety Strategy)</mat-checkbox
+      >
+      <mat-form-field
+        *ngIf="form.get('certificado4')?.value"
+        appearance="outline"
+        class="full-width"
+      >
+        <mat-label>Fecha de caducidad</mat-label>
+        <input
+          matInput
+          [matDatepicker]="pickerCaducidad"
+          formControlName="fechaCaducidadEspecificacion1"
+        />
+        <mat-datepicker-toggle
+          matSuffix
+          [for]="pickerCaducidad"
+        ></mat-datepicker-toggle>
+        <mat-datepicker #pickerCaducidad></mat-datepicker>
+      </mat-form-field>
+      <mat-checkbox formControlName="certificado5"
+        >CLAC (Comisión Latinoamericana de Aviación Civil)</mat-checkbox
+      >
+      <mat-form-field
+        *ngIf="form.get('certificado5')?.value"
+        appearance="outline"
+        class="full-width"
+      >
+        <mat-label>Fecha de caducidad</mat-label>
+        <input
+          matInput
+          [matDatepicker]="pickerCaducidad"
+          formControlName="fechaCaducidadEspecificacion1"
+        />
+        <mat-datepicker-toggle
+          matSuffix
+          [for]="pickerCaducidad"
+        ></mat-datepicker-toggle>
+        <mat-datepicker #pickerCaducidad></mat-datepicker>
+      </mat-form-field>
+      <mat-checkbox formControlName="certificado6"
+        >Programa de Intercambio de Rolls-Royce</mat-checkbox
+      >
+      <mat-form-field
+        *ngIf="form.get('certificado6')?.value"
+        appearance="outline"
+        class="full-width"
+      >
+        <mat-label>Fecha de caducidad</mat-label>
+        <input
+          matInput
+          [matDatepicker]="pickerCaducidad"
+          formControlName="fechaCaducidadEspecificacion1"
+        />
+        <mat-datepicker-toggle
+          matSuffix
+          [for]="pickerCaducidad"
+        ></mat-datepicker-toggle>
+        <mat-datepicker #pickerCaducidad></mat-datepicker>
+      </mat-form-field>
+      <mat-checkbox formControlName="certificado7"
+        >Airbus Safety Program</mat-checkbox
+      >
+      <mat-form-field
+        *ngIf="form.get('certificado7')?.value"
+        appearance="outline"
+        class="full-width"
+      >
+        <mat-label>Fecha de caducidad</mat-label>
+        <input
+          matInput
+          [matDatepicker]="pickerCaducidad"
+          formControlName="fechaCaducidadEspecificacion1"
+        />
+        <mat-datepicker-toggle
+          matSuffix
+          [for]="pickerCaducidad"
+        ></mat-datepicker-toggle>
+        <mat-datepicker #pickerCaducidad></mat-datepicker>
+      </mat-form-field>
+      <mat-checkbox formControlName="certificado8"
+        >Programa Boeing Safety Exchange</mat-checkbox
+      >
+      <mat-form-field
+        *ngIf="form.get('certificado8')?.value"
+        appearance="outline"
+        class="full-width"
+      >
+        <mat-label>Fecha de caducidad</mat-label>
+        <input
+          matInput
+          [matDatepicker]="pickerCaducidad"
+          formControlName="fechaCaducidadEspecificacion1"
+        />
+        <mat-datepicker-toggle
+          matSuffix
+          [for]="pickerCaducidad"
+        ></mat-datepicker-toggle>
+        <mat-datepicker #pickerCaducidad></mat-datepicker>
+      </mat-form-field>
+      <mat-checkbox formControlName="certificado9"
+        >Red de Escuelas Aeronáuticas de América Latina y el Caribe
+        (REDALC)</mat-checkbox
+      >
+      <mat-form-field
+        *ngIf="form.get('certificado9')?.value"
+        appearance="outline"
+        class="full-width"
+      >
+        <mat-label>Fecha de caducidad</mat-label>
+        <input
+          matInput
+          [matDatepicker]="pickerCaducidad"
+          formControlName="fechaCaducidadEspecificacion1"
+        />
+        <mat-datepicker-toggle
+          matSuffix
+          [for]="pickerCaducidad"
+        ></mat-datepicker-toggle>
+        <mat-datepicker #pickerCaducidad></mat-datepicker>
+      </mat-form-field>
+      <mat-checkbox formControlName="certificado10"
+        >GADM (Global Aviation Data Management)</mat-checkbox
+      >
+      <mat-form-field
+        *ngIf="form.get('certificado10')?.value"
+        appearance="outline"
+        class="full-width"
+      >
+        <mat-label>Fecha de caducidad</mat-label>
+        <input
+          matInput
+          [matDatepicker]="pickerCaducidad"
+          formControlName="fechaCaducidadEspecificacion1"
+        />
+        <mat-datepicker-toggle
+          matSuffix
+          [for]="pickerCaducidad"
+        ></mat-datepicker-toggle>
+        <mat-datepicker #pickerCaducidad></mat-datepicker>
+      </mat-form-field>
+      <mat-checkbox formControlName="certificado11"
+        >RASG-PA (Regional Aviation Safety Group - Pan America)</mat-checkbox
+      >
+      <mat-form-field
+        *ngIf="form.get('certificado11')?.value"
+        appearance="outline"
+        class="full-width"
+      >
+        <mat-label>Fecha de caducidad</mat-label>
+        <input
+          matInput
+          [matDatepicker]="pickerCaducidad"
+          formControlName="fechaCaducidadEspecificacion1"
+        />
+        <mat-datepicker-toggle
+          matSuffix
+          [for]="pickerCaducidad"
+        ></mat-datepicker-toggle>
+        <mat-datepicker #pickerCaducidad></mat-datepicker>
+      </mat-form-field>
+      <mat-checkbox formControlName="certificado12"
+        >COSCAP (Cooperative Development of Operational Safety and Continuing
+        Airworthiness Programmes)</mat-checkbox
+      >
+      <mat-form-field
+        *ngIf="form.get('certificado12')?.value"
+        appearance="outline"
+        class="full-width"
+      >
+        <mat-label>Fecha de caducidad</mat-label>
+        <input
+          matInput
+          [matDatepicker]="pickerCaducidad"
+          formControlName="fechaCaducidadEspecificacion1"
+        />
+        <mat-datepicker-toggle
+          matSuffix
+          [for]="pickerCaducidad"
+        ></mat-datepicker-toggle>
+        <mat-datepicker #pickerCaducidad></mat-datepicker>
+      </mat-form-field>
+      <mat-checkbox formControlName="certificado13"
+        >Certificacion ISO - CALIDAD</mat-checkbox
+      >
+      <mat-form-field
+        *ngIf="form.get('certificado13')?.value"
+        appearance="outline"
+        class="full-width"
+      >
+        <mat-label>Fecha de caducidad</mat-label>
+        <input
+          matInput
+          [matDatepicker]="pickerCaducidad"
+          formControlName="fechaCaducidadEspecificacion1"
+        />
+        <mat-datepicker-toggle
+          matSuffix
+          [for]="pickerCaducidad"
+        ></mat-datepicker-toggle>
+        <mat-datepicker #pickerCaducidad></mat-datepicker>
+      </mat-form-field>
+      <mat-checkbox formControlName="certificado14"
+        >Certificacion ISO - MEDIO AMBIENTE</mat-checkbox
+      >
+      <mat-form-field
+        *ngIf="form.get('certificado14')?.value"
+        appearance="outline"
+        class="full-width"
+      >
+        <mat-label>Fecha de caducidad</mat-label>
+        <input
+          matInput
+          [matDatepicker]="pickerCaducidad"
+          formControlName="fechaCaducidadEspecificacion1"
+        />
+        <mat-datepicker-toggle
+          matSuffix
+          [for]="pickerCaducidad"
+        ></mat-datepicker-toggle>
+        <mat-datepicker #pickerCaducidad></mat-datepicker>
+      </mat-form-field>
+      <mat-checkbox formControlName="certificado15"
+        >Certificacion ISO - SEGURIDAD EN EL TRABAJO</mat-checkbox
+      >
+      <mat-form-field
+        *ngIf="form.get('certificado15')?.value"
+        appearance="outline"
+        class="full-width"
+      >
+        <mat-label>Fecha de caducidad</mat-label>
+        <input
+          matInput
+          [matDatepicker]="pickerCaducidad"
+          formControlName="fechaCaducidadEspecificacion1"
+        />
+        <mat-datepicker-toggle
+          matSuffix
+          [for]="pickerCaducidad"
+        ></mat-datepicker-toggle>
+        <mat-datepicker #pickerCaducidad></mat-datepicker>
+      </mat-form-field>
+      <mat-checkbox formControlName="certificado16"
+        >Certificacion Multinacional (SRVSOP) - OMA/CIAC</mat-checkbox
+      >
+      <mat-form-field
+        *ngIf="form.get('certificado16')?.value"
+        appearance="outline"
+        class="full-width"
+      >
+        <mat-label>Fecha de caducidad</mat-label>
+        <input
+          matInput
+          [matDatepicker]="pickerCaducidad"
+          formControlName="fechaCaducidadEspecificacion1"
+        />
+        <mat-datepicker-toggle
+          matSuffix
+          [for]="pickerCaducidad"
+        ></mat-datepicker-toggle>
+        <mat-datepicker #pickerCaducidad></mat-datepicker>
+      </mat-form-field>
+      <mat-checkbox formControlName="certificado17"
+        >GRUPO DE COORDINACION PARA LA SEGURIDAD OPERACIONAL (GCSO) - INDUSTRIA
+        BOLIVIA</mat-checkbox
+      >
+      <mat-form-field
+        *ngIf="form.get('certificado17')?.value"
+        appearance="outline"
+        class="full-width"
+      >
+        <mat-label>Fecha de caducidad</mat-label>
+        <input
+          matInput
+          [matDatepicker]="pickerCaducidad"
+          formControlName="fechaCaducidadEspecificacion1"
+        />
+        <mat-datepicker-toggle
+          matSuffix
+          [for]="pickerCaducidad"
+        ></mat-datepicker-toggle>
+        <mat-datepicker #pickerCaducidad></mat-datepicker>
+      </mat-form-field>
+      <!--</div>-->
+    </mat-tab>
+
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label
+        >Listado de Aeronaves Registradas en sus OpSpecs (AOC) / ESINS (CIAC) -
+        Indique Matricula, Marca y Modelo (Eje. CP-1234; CESSNA; R182). Indique
+        "No aplica" si la Organización/Entidad no tiene aeronaves
+        registradas.</mat-label
+      >
+      <textarea
+        matInput
+        formControlName="aeronaves_registradas"
+        rows="4"
+      ></textarea>
+    </mat-form-field>
+    <!--TAB 4-->
+    <mat-tab label="4. Personal Directorio y Técnico">
+      <ng-template mat-tab-label>
+        <img
+          src="assets/administrator.png"
+          width="20"
+          height="20"
+          style="margin-right: 8px"
+        />
+        4. Personal Directorio y Técnico
+      </ng-template>
+      <div
+        *ngIf="['1'].includes(form.get('tipo_explotador')?.value)"
+        style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px"
+      >
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Gerente O Ejecutivo Responsable</mat-label>
+          <input matInput formControlName="numero_resolucion_administrativa" />
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Teléfono</mat-label>
+          <input matInput formControlName="numero_resolucion_administrativa" />
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Correo</mat-label>
+          <input matInput formControlName="numero_resolucion_administrativa" />
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Fecha Designación</mat-label>
+          <input matInput formControlName="numero_resolucion_administrativa" />
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Responsable de Mantenimineto (OMA) </mat-label>
+          <input matInput formControlName="numero_resolucion_administrativa" />
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Teléfono</mat-label>
+          <input matInput formControlName="numero_resolucion_administrativa" />
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Correo</mat-label>
+          <input matInput formControlName="numero_resolucion_administrativa" />
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Fecha Designación</mat-label>
+          <input matInput formControlName="numero_resolucion_administrativa" />
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Responsable de SMS </mat-label>
+          <input matInput formControlName="numero_resolucion_administrativa" />
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Teléfono</mat-label>
+          <input matInput formControlName="numero_resolucion_administrativa" />
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Correo</mat-label>
+          <input matInput formControlName="numero_resolucion_administrativa" />
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Fecha Designación</mat-label>
+          <input matInput formControlName="numero_resolucion_administrativa" />
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Responsable de Calidad </mat-label>
+          <input matInput formControlName="numero_resolucion_administrativa" />
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Teléfono</mat-label>
+          <input matInput formControlName="numero_resolucion_administrativa" />
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Correo</mat-label>
+          <input matInput formControlName="numero_resolucion_administrativa" />
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Fecha Designación</mat-label>
+          <input matInput formControlName="numero_resolucion_administrativa" />
+        </mat-form-field>
+      </div>
+    </mat-tab>
+
+    <!--</div>-->
+
+    <!-- Columna derecha -->
+    <!--<div class="form-column">-->
+  </mat-tab-group>
+  <!-- Botón en toda la fila -->
+  <div class="form-actions">
+    <button mat-raised-button color="primary" type="submit">Envdiar</button>
+  </div>
+</form>

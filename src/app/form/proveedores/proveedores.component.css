@@ -1,0 +1,51 @@
+.form-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+  max-width: 1300px;
+  margin: 2rem auto;
+}
+
+.form-column {
+  flex: 1 1 45%;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.full-width {
+  width: 100%;
+}
+
+.section-label {
+  font-weight: 600;
+  margin-top: 8px;
+}
+
+.radio-group {
+  /*display: flex;
+  flex-direction: column;*/
+  gap: 4px;
+}
+
+.form-actions {
+  width: 100%;
+  margin-top: 24px;
+  display: flex;
+  justify-content: center;
+}
+
+@media (max-width: 768px) {
+  .form-column {
+    flex: 1 1 100%;
+  }
+}
+
+
+.form-title {
+  font-size: 24px;
+  font-weight: bold;
+  color: #3f51b5; /* Color Angular Material primario */
+  text-align: center;
+  width: 100%;
+}
