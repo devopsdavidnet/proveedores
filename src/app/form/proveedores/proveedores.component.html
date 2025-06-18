@@ -25,7 +25,7 @@
           <mat-option value="1">EXPLOTADOR AEREO - AOC </mat-option>
           <mat-option value="2">ORGANIZACION DE MANTENIMIENTO </mat-option>
           <mat-option value="3"
-            >CENTRO DE INSTRUCCION DE AERONAUTICA CIVIL - CIAC
+            >CENTRO DE INSTRUCCIÓN DE AERONAUTICA CIVIL - CIAC
           </mat-option>
           <mat-option value="4">OPERADOR AEREO (RAB 91)</mat-option>
           <mat-option value="5">OPERADOR DE AERODROMO (RAB 139)</mat-option>
@@ -37,7 +37,7 @@
       </mat-form-field>
 
       <mat-form-field
-        *ngIf="form.get('tipo_explotador')?.value === '10'"
+        *ngIf="form.get('tipo_explotador')?.value === '7'"
         appearance="outline"
         class="full-width"
       >
@@ -116,10 +116,20 @@
       </mat-form-field>
 
       <mat-form-field appearance="outline" class="full-width">
-        <mat-label
+        <!--<mat-label
           >Fecha de expiración de la Certificación vigente de la
           Organización/Entidad
         </mat-label>
+-->
+
+        <mat-label *ngIf="['1'].includes(form.get('tipo_explotador')?.value)">
+          Fecha de expiración de Permiso de Operación
+        </mat-label>
+        <mat-label *ngIf="!['1'].includes(form.get('tipo_explotador')?.value)">
+          Fecha de expiración de la Certificación vigente de la
+          Organización/Entidad
+        </mat-label>
+
         <input
           matInput
           [matDatepicker]="picker"
@@ -246,7 +256,7 @@
       <mat-form-field
         appearance="outline"
         class="full-width"
-        *ngIf="!['3'].includes(form.get('tipo_explotador')?.value)"
+        *ngIf="['1', '3'].includes(form.get('tipo_explotador')?.value)"
       >
         <mat-label
           >Tipo de Transporte Aereo Comercial de la Organización/Entidad
@@ -268,9 +278,31 @@
         <input matInput formControlName="otro_tipo_transporte_aereo" />
       </mat-form-field>
 
+      <!-- Pregunta -->
+      <mat-checkbox formControlName="tieneFechaSMS">
+        Fecha de aceptación del Manual SMS
+      </mat-checkbox>
+
+      <!-- Campo visible solo si la respuesta es "Sí" -->
+      <div *ngIf="form.get('tieneFechaSMS')?.value" style="margin-top: 12px">
+        <mat-form-field appearance="outline">
+          <mat-label>Fecha de aceptación SMS</mat-label>
+          <input
+            matInput
+            [matDatepicker]="picker"
+            formControlName="fechaAceptacion"
+          />
+          <mat-datepicker-toggle
+            matSuffix
+            [for]="picker"
+          ></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+      </div>
+
       <!--Especificaciones relativas a las operacinones 
    operaciones especificas otorgandas al organizacion-->
-      <div *ngIf="!['3'].includes(form.get('tipo_explotador')?.value)">
+      <div *ngIf="!['3', '2'].includes(form.get('tipo_explotador')?.value)">
         <label class="section-label">
           Aprobaciones específicas otorgadas a la Organización/Entidad </label
         ><br />
@@ -308,60 +340,60 @@
             <input matInput formControlName="otroTexto13" />
           </mat-form-field>
         </div> -->
-        <br />
-        <div *ngIf="['1'].includes(form.get('tipo_explotador')?.value)">
-          <mat-form-field appearance="outline">
-            <mat-label>Cantidad total de Aeronaves</mat-label>
-            <input
-              matInput
-              type="number"
-              [formControlName]="'cantidad'"
-              min="1"
-            />
-          </mat-form-field>
+      </div>
+      <br />
+      <div *ngIf="['1', '3'].includes(form.get('tipo_explotador')?.value)">
+        <mat-form-field appearance="outline">
+          <mat-label>Cantidad total de Aeronaves</mat-label>
+          <input
+            matInput
+            type="number"
+            [formControlName]="'cantidad'"
+            min="1"
+          />
+        </mat-form-field>
 
-          <button
-            mat-raised-button
-            color="primary"
-            (click)="generarInputs()"
-            type="button"
+        <button
+          mat-raised-button
+          color="primary"
+          (click)="generarInputs()"
+          type="button"
+        >
+          Aceptar
+        </button>
+
+        <div formArrayName="campos" style="margin-top: 20px">
+          <div
+            style="
+              display: grid;
+              grid-template-columns: repeat(4, 1fr);
+              gap: 16px;
+            "
+            *ngFor="let control of campos.controls; let i = index"
+            [formGroupName]="i"
           >
-            Aceptar
-          </button>
-
-          <div formArrayName="campos" style="margin-top: 20px">
-            <div
-              style="
-                display: grid;
-                grid-template-columns: repeat(4, 1fr);
-                gap: 16px;
-              "
-              *ngFor="let control of campos.controls; let i = index"
-              [formGroupName]="i"
+            <mat-form-field
+              appearance="fill"
+              style="width: 100%; margin-top: 10px"
             >
-              <mat-form-field
-                appearance="fill"
-                style="width: 100%; margin-top: 10px"
-              >
-                <mat-label>Matricula {{ i + 1 }}</mat-label>
-                <input matInput formControlName="valor" />
-              </mat-form-field>
-              <mat-form-field
-                appearance="fill"
-                style="width: 100%; margin-top: 10px"
-              >
-                <mat-label>Marca {{ i + 1 }}</mat-label>
-                <input matInput formControlName="valor" />
-              </mat-form-field>
+              <mat-label>Matricula {{ i + 1 }}</mat-label>
+              <input matInput formControlName="valor" />
+            </mat-form-field>
+            <mat-form-field
+              appearance="fill"
+              style="width: 100%; margin-top: 10px"
+            >
+              <mat-label>Marca {{ i + 1 }}</mat-label>
+              <input matInput formControlName="valor" />
+            </mat-form-field>
 
-              <mat-form-field
-                appearance="fill"
-                style="width: 100%; margin-top: 10px"
-              >
-                <mat-label>Modelo {{ i + 1 }}</mat-label>
-                <input matInput formControlName="valor" />
-              </mat-form-field>
-            </div>
+            <mat-form-field
+              appearance="fill"
+              style="width: 100%; margin-top: 10px"
+            >
+              <mat-label>Modelo {{ i + 1 }}</mat-label>
+              <input matInput formControlName="valor" />
+            </mat-form-field>
           </div>
         </div>
       </div>
@@ -380,11 +412,11 @@
       <br />
       <label
         class="section-label"
-        *ngIf="['3', '4', '5'].includes(form.get('tipo_explotador')?.value)"
+        *ngIf="['3', '2'].includes(form.get('tipo_explotador')?.value)"
         >Organización</label
       >
       <mat-radio-group
-        *ngIf="['3', '4', '5'].includes(form.get('tipo_explotador')?.value)"
+        *ngIf="['3', '2'].includes(form.get('tipo_explotador')?.value)"
         formControlName="nacionalidad_organizacion"
         class="radio-group"
       >
@@ -409,10 +441,10 @@
       </mat-radio-group>
 
       <!--Capacidad de la orgnaiazación-->
-      <div *ngIf="['3'].includes(form.get('tipo_explotador')?.value)">
+      <div *ngIf="['2'].includes(form.get('tipo_explotador')?.value)">
         <br />
         <label class="section-label">
-          Capacidades de la Organización/Entidad (solo OMA) <br />
+          Capacidades de la Organización/Entidad <br />
         </label>
         <mat-checkbox formControlName="capacidad1"
           >Estructura de Aeronaves</mat-checkbox
@@ -440,9 +472,9 @@
         </div>
       </div>
 
-      <div *ngIf="['4', '5'].includes(form.get('tipo_explotador')?.value)">
+      <div *ngIf="['3'].includes(form.get('tipo_explotador')?.value)">
         <label class="section-label">
-          Tipo de la Organización/Entidad (Solo CIAC) <br />
+          Tipo de la Organización/Entidad <br />
         </label>
         <mat-checkbox formControlName="tipo1">Tipo 1</mat-checkbox>
         <mat-checkbox formControlName="tipo2">Tipo 2</mat-checkbox>
@@ -1216,7 +1248,7 @@
           Aceptar
         </button>
 
-        <div formArrayName="campos" style="margin-top: 20px width: 100%;">
+        <div formArrayName="campos" style="margin-top: 20px width 100%">
           <div
             style="
               display: grid;
@@ -1374,7 +1406,7 @@
           Aceptar
         </button>
 
-        <div formArrayName="campos" style="margin-top: 20px width: 100%;">
+        <div formArrayName="campos" style="margin-top: 20px width 100">
           <div
             style="
               display: grid;
@@ -1425,6 +1457,163 @@
       </div>
     </mat-tab>
 
+    <!--TAB 5-->
+    <div *ngIf="form.get('tieneFechaSMS')?.value">
+      <mat-tab label="5. Inidicadores">
+        <ng-template mat-tab-label>
+          <img
+            src="assets/histogram.png"
+            width="20"
+            height="20"
+            style="margin-right: 8px"
+          />
+          5. Objetivos Metas e Indicadores
+        </ng-template>
+
+        <button mat-raised-button color="primary" (click)="agregarObjetivo()">
+          + Agregar Objetivo
+        </button>
+
+        <div
+          formArrayName="objetivos"
+          *ngFor="let objetivo of objetivos.controls; let i = index"
+          [formGroupName]="i"
+          style="margin-top: 24px"
+        >
+          <mat-form-field appearance="outline" style="width: 100%">
+            <mat-label>Nombre del objetivo</mat-label>
+            <input matInput formControlName="nombreObjetivo" />
+            <mat-error *ngIf="objetivo.get('nombreObjetivo')?.invalid"
+              >Requerido</mat-error
+            >
+          </mat-form-field>
+
+          <button mat-button color="accent" (click)="agregarMeta(i)">
+            + Agregar Meta
+          </button>
+          <button mat-button color="warn" (click)="eliminarObjetivo(i)">
+            Eliminar Objetivo
+          </button>
+
+          <div
+            formArrayName="metas"
+            *ngFor="let meta of metas(i).controls; let j = index"
+            [formGroupName]="j"
+            style="margin-left: 20px; margin-top: 16px"
+          >
+            <h4>Meta {{ j + 1 }}</h4>
+
+            <mat-form-field appearance="outline" style="width: 100%">
+              <mat-label>Nombre de la meta</mat-label>
+              <input matInput formControlName="nombreMeta" />
+              <mat-error *ngIf="meta.get('nombreMeta')?.invalid"
+                >Requerido</mat-error
+              >
+            </mat-form-field>
+
+            <button mat-button (click)="agregarIndicador(i, j)">
+              + Indicador
+            </button>
+            <button mat-button color="warn" (click)="eliminarMeta(i, j)">
+              Eliminar Meta
+            </button>
+
+            <div
+              formArrayName="indicadores"
+              *ngFor="
+                let indicador of indicadores(i, j).controls;
+                let k = index
+              "
+              [formGroupName]="k"
+              style="margin-left: 40px; margin-top: 12px"
+            >
+              <mat-form-field appearance="outline" style="width: 80%">
+                <mat-label>Indicador {{ k + 1 }}</mat-label>
+                <input matInput formControlName="nombreIndicador" />
+                <mat-error *ngIf="indicador.get('nombreIndicador')?.invalid"
+                  >Requerido</mat-error
+                > </mat-form-field
+              ><br />
+              <mat-label>Tipo de Indicador</mat-label>
+              <mat-radio-group formControlName="tipoIndicador">
+                <mat-radio-button value="reactivo">Reactivo</mat-radio-button>
+                <mat-radio-button value="proactivo">Proactivo</mat-radio-button>
+              </mat-radio-group>
+
+              <mat-error
+                *ngIf="
+                  form.get('tipoIndicador')?.invalid &&
+                  form.get('tipoIndicador')?.touched
+                "
+              >
+                Selecciona una opción
+              </mat-error>
+              <br />
+              <mat-form-field appearance="outline" style="width: 50%">
+                <mat-label>Formula {{ k + 1 }}</mat-label>
+                <input matInput formControlName="nombreIndicador" />
+                <mat-error *ngIf="indicador.get('nombreIndicador')?.invalid"
+                  >Requerido</mat-error
+                >
+              </mat-form-field>
+
+              <!-- Selector: periodicidad de cálculo -->
+              <mat-form-field appearance="outline" class="w-full">
+                <mat-label>Periodicidad de cálculo</mat-label>
+                <mat-select formControlName="periodicidadCalculo">
+                  <mat-option value="diario">Diario</mat-option>
+                  <mat-option value="mensual">Mensual</mat-option>
+                  <mat-option value="trimestral">Trimestral</mat-option>
+                  <mat-option value="semestral">Semestral</mat-option>
+                  <mat-option value="anual">Anual</mat-option>
+                </mat-select>
+                <mat-error *ngIf="indicador.get('periodicidadCalculo')?.invalid"
+                  >Seleccione una opción</mat-error
+                >
+              </mat-form-field>
+
+              <br />
+              <mat-form-field appearance="outline" style="width: 50%">
+                <mat-label>Nivel de Alerta {{ k + 1 }}</mat-label>
+                <input matInput formControlName="nivelAlerta1" />
+                <mat-error *ngIf="indicador.get('nivelAlerta1')?.invalid"
+                  >Requerido</mat-error
+                >
+              </mat-form-field>
+              <br />
+              <mat-form-field appearance="outline" style="width: 50%">
+                <mat-label>Nivel de Alerta {{ k + 2 }}</mat-label>
+                <input matInput formControlName="nivelAlerta2" />
+                <mat-error *ngIf="indicador.get('nivelAlerta2')?.invalid"
+                  >Requerido</mat-error
+                >
+              </mat-form-field>
+              <br />
+              <mat-form-field appearance="outline" style="width: 50%">
+                <mat-label>Nivel de Alerta {{ k + 3 }}</mat-label>
+                <input matInput formControlName="nivelAlerta3" />
+                <mat-error *ngIf="indicador.get('nivelAlerta3')?.invalid"
+                  >Requerido</mat-error
+                >
+              </mat-form-field>
+
+              <br />
+              <button
+                mat-icon-button
+                color="warn"
+                (click)="eliminarIndicador(i, j, k)"
+              >
+                <mat-icon>delete</mat-icon>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!--<button mat-raised-button color="accent" (click)="enviar()">
+        ✅ Enviar
+      </button>-->
+      </mat-tab>
+    </div>
     <!--</div>-->
 
     <!-- Columna derecha -->

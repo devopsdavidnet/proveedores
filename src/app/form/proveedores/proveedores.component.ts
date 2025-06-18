@@ -2,13 +2,21 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { FormArray, FormControl } from '@angular/forms';
 
+
+
+
+
+
 @Component({
   selector: 'app-proveedores',
   templateUrl: './proveedores.component.html',
   styleUrls: ['./proveedores.component.css']
 })
+
+
 export class ProveedoresComponent implements OnInit {
   form: FormGroup;
+   
   numeroInputs: number = 0;
   inputs: string[] = [];
 
@@ -17,7 +25,11 @@ export class ProveedoresComponent implements OnInit {
   this.form = this.fb.group({
     cantidad: [0],
       campos: this.fb.array([]),
+      objetivos: this.fb.array([]),
 
+  
+       
+      
       
   nombre_organizacion: ['', Validators.required],
   organizacion: ['', Validators.required],
@@ -85,6 +97,11 @@ numero_resolucion_administrativaotro_tipo_operacion: [''],
   certificado17:[false],
 
 
+    nombreIndicador: ['', Validators.required],
+    periodicidadCalculo: ['', Validators.required],
+
+
+    
 
   departamento: ['', Validators.required],
 
@@ -94,14 +111,31 @@ numero_resolucion_administrativaotro_tipo_operacion: [''],
   nacionalidad_organizacion: ['', Validators.required],
   fechaInicioCertificacion: ['', Validators.required],
   fechaExpiracionCertificacion: ['', Validators.required],
-  
+  nivelAlerta1: ['', Validators.required],
+  nivelAlerta2: ['', Validators.required],
+  nivelAlerta3: ['', Validators.required],
+    tieneFechaSMS: [false],
+    fechaAceptacion: [''],
 
+
+
+    
+  
+ tipoIndicador: ['', Validators.required],  // o el nombre que desees
   telefono_organizacion: ['', Validators.required],
   Correo_organizacion: ['', Validators.required],
   numero_certificado: ['', Validators.required],
   numero_resolucion_administrativa: ['', Validators.required],
+
+ 
+  
+
+  
 });
   }
+
+
+  
 
   ngOnInit() {
     /*this.form.get('tipo_explotador')?.valueChanges.subscribe(value => {
@@ -114,11 +148,23 @@ numero_resolucion_administrativaotro_tipo_operacion: [''],
       }
       edadControl?.updateValueAndValidity();
     });*/
+
+    this.form.get('tieneFechaSMS')?.valueChanges.subscribe(
+      value =>{
+        if(!value){
+this.form.get('fechaAceptacion')?.reset();
+
+        }
+
+      }
+    )
     
   }
 
 
 
+
+  
 
   onSubmit() {
     if (this.form.valid) {
@@ -163,5 +209,77 @@ generarInputs() {
   
 
 
+get objetivos(): FormArray {
+    return this.form.get('objetivos') as FormArray;
+  }
+
+  metas(i: number): FormArray {
+    return this.objetivos.at(i).get('metas') as FormArray;
+  }
+
+  indicadores(i: number, j: number): FormArray {
+    return this.metas(i).at(j).get('indicadores') as FormArray;
+  }
+
+  nuevoIndicador(): FormGroup {
+    return this.fb.group({
+      nombreIndicador: ['', Validators.required]
+    });
+  }
+
+  nuevaMeta(): FormGroup {
+    return this.fb.group({
+      nombreMeta: ['', Validators.required],
+      indicadores: this.fb.array([this.nuevoIndicador()])
+    });
+  }
+
+  nuevoObjetivo(): FormGroup {
+    return this.fb.group({
+      nombreObjetivo: ['', Validators.required],
+      metas: this.fb.array([this.nuevaMeta()])
+    });
+  }
+
+  agregarObjetivo() {
+    this.objetivos.push(this.nuevoObjetivo());
+  }
+
+  eliminarObjetivo(i: number) {
+    this.objetivos.removeAt(i);
+  }
+
+  agregarMeta(i: number) {
+    this.metas(i).push(this.nuevaMeta());
+  }
+
+  eliminarMeta(i: number, j: number) {
+    this.metas(i).removeAt(j);
+  }
+
+  agregarIndicador(i: number, j: number) {
+    this.indicadores(i, j).push(this.nuevoIndicador());
+  }
+
+  eliminarIndicador(i: number, j: number, k: number) {
+    this.indicadores(i, j).removeAt(k);
+  }
+
+  enviar() {
+    if (this.form.valid) {
+      console.log('✅ Datos enviados:', this.form.value);
+    } else {
+      this.form.markAllAsTouched();
+    }
+  }
+
+
+
+
 
 }
+
+
+
+
+
